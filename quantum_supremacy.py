@@ -7,13 +7,15 @@ def main():
     f = open("title.txt", "r", encoding="utf8")
     delay_print(f.read(), dt=0.005)
     delay_print(80*'-', dt=0.003)
-    s0 = " In this game, the players are qubits."
-    s1 = " Your goal is to maximize your excitation, <sigma_z>, on the Bloch sphere."
-    s2 = " Players will pick the initial state of their qubit, unknown to the other players."
-    s3 = " Then, players will consecutively add gates to a circuit, rotating or entangling any qubits."
-    s4 = " After every round, a measurement bitstring will be given, to get a glimpse of the current state."
-    s5 = " The player with the maximum <sigma_z> at the end wins...good luck!~"
-    delay_print("Welcome to Quantum Supremacy!"+s1+s2+s3+s4+s5, dt=0.04)
+    delay_print('Would you like instructions (y/n)?', dt=0.003)
+    if str(input()) == 'y':
+        s0 = " In this game, the players are qubits."
+        s1 = " Your goal is to maximize your excitation, <sigma_z>, on the Bloch sphere."
+        s2 = " Players will pick the initial state of their qubit, unknown to the other players."
+        s3 = " Then, players will consecutively add gates to a circuit, rotating or entangling any qubits."
+        s4 = " After every round, a measurement bitstring will be given, to get a glimpse of the current state."
+        s5 = " The player with the maximum <sigma_z> at the end wins...good luck!~"
+        delay_print("Welcome to Quantum Supremacy!"+s1+s2+s3+s4+s5, dt=0.04)
 
     print('\n')
     N = get_players()
@@ -36,7 +38,8 @@ def main():
     fig = plt.figure()
     players = ['Player %d' % (i+1) for i in range(N)]
     plt.bar(players,p1_vec, color='maroon')
-    plt.title('Final Excitations: Congrats to Player %d!' % (winner_ind + 1))
+    plt.ylim([0,1])
+    plt.title('Final Excitations: congrats to Player %d!' % (winner_ind + 1))
     plt.ylabel(r'$\langle \sigma_z \rangle$')
     plt.show()
 

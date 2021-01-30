@@ -61,9 +61,10 @@ def get_gate_and_target(N):
     delay_print("    1:Y      (1-qubit)", dt=0.01)
     delay_print("    2:Z      (1-qubit)", dt=0.01)
     delay_print("    3:H      (1-qubit)", dt=0.01)
-    delay_print("    4:CNOT   (2-qubit)", dt=0.01)
-    delay_print("    5:CPHASE (2-qubit)", dt=0.01)
-    delay_print("    6:Swap   (2-qubit)", dt=0.01)
+    delay_print("    4:RX/4   (1-qubit)", dt=0.01)
+    delay_print("    5:CNOT   (2-qubit)", dt=0.01)
+    delay_print("    6:CPHASE (2-qubit)", dt=0.01)
+    delay_print("    7:Swap   (2-qubit)", dt=0.01)
 
     while True:
         try:
@@ -81,7 +82,7 @@ def get_gate_and_target(N):
     while True:
         try:
             target = list(map(int, input("    Input (i or i,j): ").split(',')))
-            target = [t-1 for t in target]
+            target = [t for t in target]
         except ValueError:
             delay_print(    "Sorry, didn't understand that!")
             continue
@@ -89,11 +90,11 @@ def get_gate_and_target(N):
 
             # Ask for another input if bad qubit index
             if max(target)+1 > N or min(target)+1<1:
-                delay_print("    Sorry, use a qubit index between 1 and %d!" % N)
+                delay_print("    Sorry, use a qubit index between 0 and %d!" % (N-1))
                 continue
 
             # Use this input if we have right number of targets
-            if (gate<4 and len(target)==2) or (gate>3 and len(target)==1) or len(target)>2 or len(target)==0:
+            if (gate<5 and len(target)==2) or (gate>4 and len(target)==1) or len(target)>2 or len(target)==0:
                 delay_print("    Sorry, use the right number of qubits!")
                 continue
 
@@ -126,10 +127,12 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
             elif gate == 3:
                 qc.h(target[0])
             elif gate == 4:
-                qc.cx(target[0],target[1])
+                qc.rx(np.pi/4, target[0])
             elif gate == 5:
-                qc.cz(target[0],target[1])
+                qc.cx(target[0],target[1])
             elif gate == 6:
+                qc.cz(target[0],target[1])
+            elif gate == 7:
                 qc.swap(target[0],target[1])
 
             print(qc)
