@@ -17,6 +17,15 @@ def get_players():
             delay_print('Please have at least two players')
     return N
 
+def get_rounds():
+    N = 0
+    while N < 1:
+        N = int(input('How many rounds would you like?\n Enter Number: '))
+
+        if N < 1:
+            delay_print('Please have at 1 round')
+    return N
+
 def get_init_state(N):
     qc = QuantumCircuit(N)
     init_string = ''
@@ -125,7 +134,7 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
             print(qc)
 
-            delay_print('\n'+"-"*80)
+            delay_print('\n'+"-"*50)
 
         delay_print("Preparing a measurement...")
         backend = provider.get_backend(backend_name)
@@ -137,10 +146,10 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
     return qc
 
-def game_end(N, qc_init, qc_game, shots=100, backend='ionq_simulator'):
+def game_end(N, qc_init, qc_game, shots=100, backend_name='ionq_simulator'):
     qc = qc_init + qc_game
     qc.measure_all()
-    backend = provider.get_backend(backend)
+    backend = provider.get_backend(backend_name)
     job = backend.run(qc, shots=shots)
     result = job.result()
     counts_dict = result.data()['counts']
