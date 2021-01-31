@@ -142,15 +142,16 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
             delay_print('\n'+"-"*50)
 
-        delay_print("Preparing a measurement...")
-        print(qc+qmeas)
-        backend = provider.get_backend(backend_name)
-        job = backend.run(qc_init+qc+qmeas, shots=2)
-        result = job.result()
-        # Since we only have 2 shots, take a random bitstr for the meas.
-        meas = random.choice(list(result.data()['counts'].keys()))
-        print("Result: %s" % meas[::-1])
-        delay_print("The measurement operators will now be removed!\n")
+        if i+1 < N_rounds:
+            delay_print("Preparing a measurement...")
+            print(qc+qmeas)
+            backend = provider.get_backend(backend_name)
+            job = backend.run(qc_init+qc+qmeas, shots=2)
+            result = job.result()
+            # Since we only have 2 shots, take a random bitstr for the meas.
+            meas = random.choice(list(result.data()['counts'].keys()))
+            print("Result: %s" % meas[::-1])
+            delay_print("The measurement operators will now be removed!\n")
 
     delay_print('\n'+"-"*50)
     delay_print("Time for the final results...")

@@ -20,8 +20,8 @@ def main():
     print('\n')
     N = get_players()
     N_rounds = get_rounds()
-    backend_name = 'ionq_simulator'
-    # backend_name = 'ionq_qpu'
+    # backend_name = 'ionq_simulator'
+    backend_name = 'ionq_qpu'
 
     delay_print(80*'-', dt=0.005)
     qc_init = get_init_state(N)
@@ -30,7 +30,6 @@ def main():
 
     p1_vec, winner_ind = game_end(N, qc_init, qc_game, backend_name = backend_name) # N argument is temp
     if backend_name is 'ionq_simulator':
-        print("HERE")
         # add some noise since ties are common
         p1_vec += np.random.normal(0,0.1,np.shape(p1_vec))
 
