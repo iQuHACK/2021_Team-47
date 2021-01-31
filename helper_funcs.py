@@ -153,7 +153,6 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
             print("Result: %s" % meas[::-1])
             delay_print("The measurement operators will now be removed!\n")
 
-    delay_print('\n'+"-"*50)
     delay_print("Time for the final results...")
     delay_print("-"*50)
 
