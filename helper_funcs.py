@@ -32,7 +32,7 @@ def get_init_state(N):
     for i in np.arange(N):
         state_valid = False
         while not state_valid:
-            delay_print("Player %d, select your initial state:" % (i+1))
+            delay_print("Player %d, select your initial state:" % i)
             delay_print(' 0: |0>')
             delay_print(' 1: |1>')
             delay_print(' 2: (|0> + |1>)/sqrt(2)')
@@ -73,9 +73,9 @@ def get_gate_and_target(N):
             delay_print(    "Sorry, didn't understand that.")
             continue
         else:
-            if gate<7:
+            if gate<8:
                 break
-            print("    Sorry, choose a gate between 0 and 6.")
+            print("    Sorry, choose a gate between 0 and 7.")
 
     # Get target(s) to add gate to
     delay_print("  Where would you like to add this gate?")
@@ -114,7 +114,7 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
         for j in range (N_players):
 
-            delay_print("Hello player %d!\n" % (j+1))
+            delay_print("Hello player %d!\n" % j)
 
             gate, target = get_gate_and_target(N_players)
 
@@ -139,7 +139,7 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
             delay_print('\n'+"-"*50)
 
-        delay_print("Preparing a measurement...")
+        delay_print("Preparing a measurement (non-projective!)...")
         backend = provider.get_backend(backend_name)
         job = backend.run(qc_init+qc+qmeas, shots=2)
         result = job.result()
