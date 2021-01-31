@@ -78,10 +78,13 @@ def get_gate_and_target(N):
             print("    Sorry, choose a gate between 0 and 7.")
 
     # Get target(s) to add gate to
-    delay_print("  Where would you like to add this gate?")
+    delay_print("  Where would you like to add this gate?  (e.g. 0 or 1,2)")
+    for i in range(N):
+        delay_print("    %d: qubit %d" % (i,i), dt=0.01)
+
     while True:
         try:
-            target = list(map(int, input("    Input (i or i,j): ").split(',')))
+            target = list(map(int, input("    Input: ").split(',')))
             target = [t for t in target]
         except ValueError:
             delay_print(    "Sorry, didn't understand that!")
@@ -114,7 +117,7 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
         for j in range (N_players):
 
-            delay_print("Hello player %d!\n" % j)
+            delay_print("Hello player %d...\n" % j)
 
             gate, target = get_gate_and_target(N_players)
 
@@ -139,13 +142,15 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
             delay_print('\n'+"-"*50)
 
-        delay_print("Preparing a measurement (non-projective!)...")
+        delay_print("Preparing a measurement...")
+        print(qc+qmeas)
         backend = provider.get_backend(backend_name)
         job = backend.run(qc_init+qc+qmeas, shots=2)
         result = job.result()
         # Since we only have 2 shots, take a random bitstr for the meas.
         meas = random.choice(list(result.data()['counts'].keys()))
         print("Result: %s" % meas[::-1])
+        delay_print("The measurement operators will now be removed!\n")
 
     return qc
 
@@ -167,7 +172,7 @@ def game_end(N, qc_init, qc_game, shots=1000, backend_name='ionq_simulator'):
 
 import sys
 import time
-def delay_print(s, dt=0.00):
+def delay_print(s, dt=0.04):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
