@@ -152,11 +152,23 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
         print("Result: %s" % meas[::-1])
         delay_print("The measurement operators will now be removed!\n")
 
+    delay_print('\n'+"-"*50)
+    delay_print("Time for the final results...")
+    delay_print("-"*50)
+
     return qc
 
 def game_end(N, qc_init, qc_game, shots=1000, backend_name='ionq_simulator'):
     qc = qc_init + qc_game
     qc.measure_all()
+
+    f = open("./text_art/final_circuit.txt", "r", encoding="utf8")
+    delay_print(f.read(), dt=0.009)
+    print(qc)
+    delay_print('')
+
+    delay_print('Calculating...')
+
     backend = provider.get_backend(backend_name)
     job = backend.run(qc, shots=shots)
     result = job.result()

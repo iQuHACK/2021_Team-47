@@ -21,33 +21,34 @@ def main():
     N = get_players()
     N_rounds = get_rounds()
     backend_name = 'ionq_simulator'
+    # backend_name = 'ionq_qpu'
 
     delay_print(80*'-', dt=0.005)
     qc_init = get_init_state(N)
     delay_print('Let the game begin! We will start the adding of gates now...\n', dt=0.04)
     qc_game = davids_gameplay_loop(N, qc_init, N_rounds = N_rounds, backend_name = backend_name)
+
     p1_vec, winner_ind = game_end(N, qc_init, qc_game, backend_name = backend_name) # N argument is temp
+    if backend_name is 'ionq_simulator':
+        print("HERE")
+        # add some noise since ties are common
+        p1_vec += np.random.normal(0,0.1,np.shape(p1_vec))
 
-    f = open("./text_art/final_circuit.txt", "r", encoding="utf8")
-    delay_print(f.read(), dt=0.009)
-    print(qc_init + qc_game)
-    delay_print('')
-
-    delay_print('Results:')
     import matplotlib.pyplot as plt
     fig = plt.figure()
     players = ['Player %d' % (i) for i in range(N)]
     plt.bar(players,p1_vec, color='maroon')
     plt.ylim([0,1])
-    plt.title('Final Excitations: congrats to Player %d!' % (winner_ind))
+    plt.title('Final Excitations: Congrats to Player %d!' % (winner_ind))
     plt.ylabel('Excitation Probability')
-    plt.show()
 
     print(p1_vec)
     delay_print('Player ' + str(winner_ind) + ' is the winner!')
 
     f = open("./text_art/end.txt", "r", encoding="utf8")
     delay_print(f.read(), dt=0.009)
+
+    plt.show()
 
 if __name__ == "__main__":
     main()
