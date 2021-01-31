@@ -149,7 +149,7 @@ def davids_gameplay_loop(N_players, qc_init, N_rounds=1, backend_name='ionq_simu
 
     return qc
 
-def game_end(N, qc_init, qc_game, shots=100, backend_name='ionq_simulator'):
+def game_end(N, qc_init, qc_game, shots=1000, backend_name='ionq_simulator'):
     qc = qc_init + qc_game
     qc.measure_all()
     backend = provider.get_backend(backend_name)

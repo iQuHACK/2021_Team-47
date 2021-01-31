@@ -36,15 +36,15 @@ def main():
     delay_print('Results:')
     import matplotlib.pyplot as plt
     fig = plt.figure()
-    players = ['Player %d' % (i+1) for i in range(N)]
+    players = ['Player %d' % (i) for i in range(N)]
     plt.bar(players,p1_vec, color='maroon')
     plt.ylim([0,1])
-    plt.title('Final Excitations: congrats to Player %d!' % (winner_ind + 1))
+    plt.title('Final Excitations: congrats to Player %d!' % (winner_ind))
     plt.ylabel(r'$\langle \sigma_z \rangle$')
     plt.show()
 
     print(p1_vec)
-    delay_print('Player ' + str(winner_ind + 1) + ' is the winner!')
+    delay_print('Player ' + str(winner_ind) + ' is the winner!')
 
     f = open("end.txt", "r", encoding="utf8")
     delay_print(f.read(), dt=0.009)

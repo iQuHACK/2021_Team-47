@@ -1,15 +1,22 @@
-# Welcome to iQuHACK 2021!
-Check out some info in the [event's repository](https://github.com/iQuHACK/2021) to get started.
+    ░██████╗░██╗░░░██╗░█████╗░███╗░░██╗████████╗██╗░░░██╗███╗░░░███╗
+    ██╔═══██╗██║░░░██║██╔══██╗████╗░██║╚══██╔══╝██║░░░██║████╗░████║
+    ██║██╗██║██║░░░██║███████║██╔██╗██║░░░██║░░░██║░░░██║██╔████╔██║
+    ╚██████╔╝██║░░░██║██╔══██║██║╚████║░░░██║░░░██║░░░██║██║╚██╔╝██║
+    ░╚═██╔═╝░╚██████╔╝██║░░██║██║░╚███║░░░██║░░░╚██████╔╝██║░╚═╝░██║
+    ░░░╚═╝░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝░░░╚═╝░░░░╚═════╝░╚═╝░░░░░╚═╝
 
-Having a README in your team's repository facilitates judging. A good README contains:
-* a clear title for your project,
-* a short abstract,
-* the motivation/goals for your project,
-* a description of the work you did, and
-* proposals for future work.
+    ░██████╗██╗░░░██╗██████╗░██████╗░███████╗███╗░░░███╗░█████╗░░█████╗░██╗░░░██╗
+    ██╔════╝██║░░░██║██╔══██╗██╔══██╗██╔════╝████╗░████║██╔══██╗██╔══██╗╚██╗░██╔╝
+    ╚█████╗░██║░░░██║██████╔╝██████╔╝█████╗░░██╔████╔██║███████║██║░░╚═╝░╚████╔╝░
+    ░╚═══██╗██║░░░██║██╔═══╝░██╔══██╗██╔══╝░░██║╚██╔╝██║██╔══██║██║░░██╗░░╚██╔╝░░
+    ██████╔╝╚██████╔╝██║░░░░░██║░░██║███████╗██║░╚═╝░██║██║░░██║╚█████╔╝░░░██║░░░
+    ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░
 
-You can find a potential README template in [one of last year's projects](https://github.com/iQuHACK/QuhacMan).
+# What is "Quantum Supremacy"?
+This is a game designed to help players get an intuition for quantum entanglement!
 
-Feel free to contact the staff with questions over our [event's slack](https://iquhack.slack.com), or via iquhack@mit.edu.
+# Description
+In this game, the players are qubits. Your goal is to maximize your excitation, <sigma_z>, on the Bloch sphere. Players will pick the initial state of their qubit, unknown to the other players. Then, players will consecutively add gates to a circuit, rotating or entangling any qubits. After every round, a measurement bitstring will be given, to get a glimpse of the current state. The player with the maximum <sigma_z> at the end wins...good luck!~
 
-Good luck!
+# Next Steps
+In the future...
